@@ -11,10 +11,10 @@ import (
 func main() {
 	user, err := user.Current()
 
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
-
+	fmt.Println(repl.INTERPRETER_FACE)
 	fmt.Printf("Hello %s!\n", user.Username)
 	fmt.Printf("Feel free to type in commands\n")
 	repl.Start(os.Stdin, os.Stdout)
