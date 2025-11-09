@@ -7,6 +7,7 @@ import (
 
 	"github.com/mtzack9/the-interpreter/evaluator"
 	"github.com/mtzack9/the-interpreter/lexer"
+	"github.com/mtzack9/the-interpreter/object"
 	"github.com/mtzack9/the-interpreter/parser"
 )
 
@@ -34,6 +35,7 @@ _________________________________________________________________
 
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
+	env := object.NewEnvironment()
 
 	for {
 		fmt.Print(PROMPT)
@@ -53,7 +55,7 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		evaluated := evaluator.Eval(program)
+		evaluated := evaluator.Eval(program, env)
 		if evaluated != nil {
 			io.WriteString(out, evaluated.Inspect())
 			io.WriteString(out, "\n")
